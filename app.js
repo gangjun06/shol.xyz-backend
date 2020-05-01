@@ -32,15 +32,15 @@ require("./router/main")(app);
 
 if (process.env.NODE_ENV === "production") {
   const privateKey = fs.readFileSync(
-    "/etc/letsencrypt/live/gangjun.duckdns.org/privkey.pem",
+    "/etc/letsencrypt/live/shol.xyz/privkey.pem",
     "utf-8"
   );
   const certificate = fs.readFileSync(
-    "/etc/letsencrypt/live/gangjun.duckdns.org/cert.pem",
+    "/etc/letsencrypt/live/shol.xyz/cert.pem",
     "utf-8"
   );
   const ca = fs.readFileSync(
-    "/etc/letsencrypt/live/gangjun.duckdns.org/chain.pem",
+    "/etc/letsencrypt/live/shol.xyz/chain.pem",
     "utf-8"
   );
   const credentials = {
