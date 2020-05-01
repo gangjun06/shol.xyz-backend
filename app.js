@@ -27,6 +27,34 @@ app.use(cors());
 // router 설정
 require("./router/main")(app);
 
-app.listen(config.devPORT, () => {
-  console.log(`App listening on ${config.devPORT}`);
-});
+if (process.env.NODE_ENV === "production") {
+  const privateKey = fs.readFileSync(
+    "/etc/letsencrypt/live/gangjun.duckdns.org/privkey.pem",
+    "utf-8"
+  );
+  const certificate = fs.readFileSync(
+    "/etc/letsencrypt/live/gangjun.duckdns.org/cert.pem",
+    "utf-8"
+  );
+  const ca = fs.readFileSync(
+    "/etc/letsencrypt/live/gangjun.duckdns.org/chain.pem",
+    "utf-8"
+  );
+  const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca,
+  };
+  https.createServer(credentials, app).listen(8443, () => {
+    console.log("HTTPS Server Running on port 8443");
+  });
+  http
+    .createServer((req, res) => {
+      res.writeHead(301, {
+        Location: "https://" + req.headers["host"] + req.url,
+      });
+    })
+    .listen(8080);
+} else {
+  app.listen(config.devPORT);
+}
