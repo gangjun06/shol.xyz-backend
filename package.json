@@ -14,6 +14,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.9.10",
-    "short-unique-id": "^2.0.7"
+    "short-unique-id": "^2.0.7",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   }
 }

@@ -4,10 +4,31 @@ const cors = require("cors");
 const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
-const fs = require('fs')
-const http = require('http')
-const https = require('https')
+const fs = require("fs");
+const http = require("http");
+const https = require("https");
+const swaggerUi = require("swagger-ui-express");
+const swaggereJsdoc = require("swagger-jsdoc");
 
+// api docs setup
+const swaggereOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Shol API",
+      version: "1.0.0",
+      description: "API for short url",
+    },
+    host: "https://shol.xyz",
+    basePath: "/",
+  },
+  apis: ["./router/*.js"],
+};
+
+const specs = swaggereJsdoc(swaggereOptions);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+// mongodb setup
 mongoose.connect(config.mongodbURL);
 
 mongoose.connection.once("open", () => {
