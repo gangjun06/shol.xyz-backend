@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "SpecialDays-backend",
+      "name": "shol.xyz",
       "script": "./app.js",
       "args": "",
       "instances": 1,
