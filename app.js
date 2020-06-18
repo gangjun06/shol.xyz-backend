@@ -51,14 +51,4 @@ app.use(cors());
 // router 설정
 require("./router/main")(app);
 
-if (process.env.NODE_ENV === "production") {
-  http
-    .createServer((req, res) => {
-      res.writeHead(301, {
-        Location: "https://" + req.headers["host"] + req.url,
-      });
-    })
-    .listen(8080);
-} else {
-  app.listen(config.devPORT);
-}
+app.listen(config.devPORT);
