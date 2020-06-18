@@ -52,26 +52,6 @@ app.use(cors());
 require("./router/main")(app);
 
 if (process.env.NODE_ENV === "production") {
-  const privateKey = fs.readFileSync(
-    "/etc/letsencrypt/live/shol.xyz/privkey.pem",
-    "utf-8"
-  );
-  const certificate = fs.readFileSync(
-    "/etc/letsencrypt/live/shol.xyz/cert.pem",
-    "utf-8"
-  );
-  const ca = fs.readFileSync(
-    "/etc/letsencrypt/live/shol.xyz/chain.pem",
-    "utf-8"
-  );
-  const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca,
-  };
-  https.createServer(credentials, app).listen(8443, () => {
-    console.log("HTTPS Server Running on port 8443");
-  });
   http
     .createServer((req, res) => {
       res.writeHead(301, {
